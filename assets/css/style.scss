@@ -2,9 +2,42 @@
 ---
 
 @import "{{ site.theme }}";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
-
 
 body {
-  font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.header {
+    background-color: #000000;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    height: 150px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ffffff;
+}
+
+.name {
+    font-size: 24px;
+    font-weight: 300;
 }
