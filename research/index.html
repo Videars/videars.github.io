@@ -2,47 +2,93 @@
 layout: default
 title: "Research"
 ---
-
 <style>
-  
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
+  main {
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .research-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .research-box {
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .research-box:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    a {
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+    }
+
+    a span {
+      color: #aaa;
+      font-weight: normal;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
   }
 
-  .research-section {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  @media (max-width: 768px) {
+    main {
+      padding: 10px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .research-box {
+      padding: 15px;
+    }
+
+    a {
+      font-size: 1rem;
+    }
+
+    a span {
+      font-size: 0.9rem;
+    }
   }
 
-  .research-box {
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-  }
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
 
-  .research-box:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
+    .research-section {
+      gap: 15px;
+    }
 
-  a {
-    text-decoration: none;
-    color: #000;
-    font-weight: bold;
-  }
+    .research-box {
+      padding: 12px;
+    }
 
-  a span {
-    color: #aaa;
-    font-weight: normal;
-  }
+    a {
+      font-size: 0.9rem;
+    }
 
-  a:hover {
-    text-decoration: underline;
+    a span {
+      font-size: 0.85rem;
+    }
   }
 </style>
 

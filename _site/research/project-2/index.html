@@ -1,49 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sleepy protocol consistency</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sleepy protocol consistency</title>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/style.css">
 </head>
 <body>
-    <div class="page-layout">
-        <h1>Consistency of the Sleepy protocol of consensus with Markov chains (ENG - Master degree thesis)</h1>
 
-        <h2>Abstract</h2>
-        <p>
-            The increasing relevance of distributed systems in deploying applications that require great scalability and high security against malicious actors has brought and is continuing to bring great attention to the study of blockchain technologies, focusing efforts on optimizing and creating consensus protocols suited to the needs of the system.<br><br>
-            
-            Indeed, consensus protocols are at the core of blockchain technology: they ensure that every node in a distributed network agrees on a common state, even in the presence of adversarial actors. The wide variety of market needs has led to the creation of multiple consensus protocols, each with its own advantages and disadvantages.<br><br>
-            
-            As a result, there is a continuing need to carefully evaluate the capabilities, potentials, and limitations of each, showing their security with mathematical models. The aim of this thesis is to test an innovative mathematical framework introduced by Kiffer et al. which has proven effective for analyzing properties of Proof of Work (PoW)-based consensus protocols.<br><br>
-            
-            We apply this framework to study a relatively new, non-PoW consensus protocol known as Sleepy. This protocol is designed to operate in environments where nodes may become inactive or fail at any moment, reducing the fraction of active honest nodes and potentially increasing the influence of corrupt nodes controlled by adversaries.<br><br>
-            
-            Understanding how the Sleepy protocol performs under these conditions is crucial for improving its security guarantees. By this new mathematical framework, this thesis aims to increase the current understanding of Sleepy’s consistency property and verify its resilience against powerful adversaries.
-        </p>
-    
-
-        <h2>Details</h2>
-        <p>
-            This thesis conducts an in-depth study of the consistency property of the Sleepy consensus protocol. Specifically, it examines the mathematical conditions necessary for the protocol to satisfy consistency by analyzing the security parameters of the system.<br><br>
-            
-            After reviewing the classical formal proof proposed in the Sleepy whitepaper, we apply a new framework that utilizes Markov chains to improve the estimation of a key concept called convergence opportunity.<br><br>
-            
-            The main result of this study is the demonstration that the Sleepy protocol is more resilient to adversarial control than previously established. Specifically, we show that the protocol can withstand a higher fraction of corrupt nodes compared to the original assumptions. In the initial whitepaper, the protocol’s security was believed to be compromised beyond a certain threshold of adversarial influence. However, our research shows that the protocol can maintain consistency even with a greater portion of compromised nodes, significantly improving its security for specific choices of security parameters.<br><br>
-            
-            In addition to proving consistency, this thesis investigates the most effective adversarial attack against the Sleepy protocol. We model this attack and analyze its probability of success in delaying consensus. This analysis enables us to compute an accurate estimate of the T parameter, which is central to the definition of T-consistency. The T parameter quantifies the number of last blocks added to the chain that cannot be considered finalized yet. Therefore, deriving a value for T which is smaller compared to the original whitepaper one represents a significant improvement for the security and efficiency of the Sleepy protocol.
-        </p>
-        
-
-        <h3>Paper preview</h3>
-        <iframe src="https://docs.google.com/viewer?url=https://videars.github.io/assets/pdfs/research2.pdf&embedded=true" width="600" height="800"></iframe>
-
-        <h3>Download</h3>
-        <p>
-            Download the entire project: 
-            <a href="https://github.com/Videars/Blockchain-Consistency/archive/refs/heads/main.zip" download>Download ZIP</a>
-        </p>
+  <header>
+    <div class="banner">
+      <h1>
+        <span class="terminal-symbol">&gt;_</span> Matteo Vicari
+      </h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/research/">Research</a></li>
+          <!-- <li><a href="/projects/">Projects</a></li> -->
+          <li><a href="/about/">About me</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
+
+
+  <main>
+    <style>
+    main {
+        .default-layout {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            color: #000;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        h1 span {
+            color: #aaa;
+            font-weight: normal;
+            display: block;
+        }
+
+        h2 {
+            margin-top: 30px;
+            color: #333;
+            font-size: 1.5em;
+        }
+
+        h3 {
+            margin-top: 20px;
+            color: #000;
+            font-size: 1.2em;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        iframe {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .download-link {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .download-link:hover {
+            background-color: #45a049;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .default-layout {
+            padding: 15px;
+        }
+
+        h1 {
+            font-size: 1.8em;
+        }
+
+        h2 {
+            font-size: 1.3em;
+        }
+
+        h3 {
+            font-size: 1.1em;
+        }
+
+        iframe {
+            height: 600px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 1.6em;
+        }
+
+        h2 {
+            font-size: 1.2em;
+        }
+
+        h3 {
+            font-size: 1em;
+        }
+
+        .default-layout {
+            padding: 10px;
+        }
+
+        iframe {
+            height: 500px;
+        }
+
+        .download-link {
+            padding: 8px 12px;
+        }
+    }
+</style>
+
+<div class="default-layout">
+    <h1>Consistency of the Sleepy protocol of consensus with Markov chains <span>(ENG - Master degree thesis)</span></h1>
+
+    <h3>Abstract</h3>
+    <p>
+        The increasing relevance of distributed systems in deploying applications that require great scalability and high security against malicious actors has brought and is continuing to bring great attention to the study of blockchain technologies, focusing efforts on optimizing and creating consensus protocols suited to the needs of the system.<br><br>
+        
+        Indeed, consensus protocols are at the core of blockchain technology: they ensure that every node in a distributed network agrees on a common state, even in the presence of adversarial actors. The wide variety of market needs has led to the creation of multiple consensus protocols, each with its own advantages and disadvantages.<br><br>
+        
+        As a result, there is a continuing need to carefully evaluate the capabilities, potentials, and limitations of each, showing their security with mathematical models. The aim of this thesis is to test an innovative mathematical framework introduced by Kiffer et al. which has proven effective for analyzing properties of Proof of Work (PoW)-based consensus protocols.<br><br>
+        
+        We apply this framework to study a relatively new, non-PoW consensus protocol known as Sleepy. This protocol is designed to operate in environments where nodes may become inactive or fail at any moment, reducing the fraction of active honest nodes and potentially increasing the influence of corrupt nodes controlled by adversaries.<br><br>
+        
+        Understanding how the Sleepy protocol performs under these conditions is crucial for improving its security guarantees. By this new mathematical framework, this thesis aims to increase the current understanding of Sleepy’s consistency property and verify its resilience against powerful adversaries.
+    </p>
+
+    <h3>Details</h3>
+    <p>
+        This thesis conducts an in-depth study of the consistency property of the Sleepy consensus protocol. Specifically, it examines the mathematical conditions necessary for the protocol to satisfy consistency by analyzing the security parameters of the system.<br><br>
+        
+        After reviewing the classical formal proof proposed in the Sleepy whitepaper, we apply a new framework that utilizes Markov chains to improve the estimation of a key concept called convergence opportunity.<br><br>
+        
+        The main result of this study is the demonstration that the Sleepy protocol is more resilient to adversarial control than previously established. Specifically, we show that the protocol can withstand a higher fraction of corrupt nodes compared to the original assumptions. In the initial whitepaper, the protocol’s security was believed to be compromised beyond a certain threshold of adversarial influence. However, our research shows that the protocol can maintain consistency even with a greater portion of compromised nodes, significantly improving its security for specific choices of security parameters.<br><br>
+        
+        In addition to proving consistency, this thesis investigates the most effective adversarial attack against the Sleepy protocol. We model this attack and analyze its probability of success in delaying consensus. This analysis enables us to compute an accurate estimate of the T parameter, which is central to the definition of T-consistency. The T parameter quantifies the number of last blocks added to the chain that cannot be considered finalized yet. Therefore, deriving a value for T which is smaller compared to the original whitepaper one represents a significant improvement for the security and efficiency of the Sleepy protocol.
+    </p>
+
+    <h3>Paper preview</h3>
+    <iframe src="https://docs.google.com/viewer?url=https://videars.github.io/assets/pdfs/research2.pdf&embedded=true" width="100%" height="800"></iframe>
+
+    <h3>Download</h3>
+    <p>
+        Download the entire project: 
+        <a class="download-link" href="https://github.com/Videars/Blockchain-Consistency/archive/refs/heads/main.zip" download>Download ZIP</a>
+    </p>
+</div>
+
+  </main>
+
+  
+  <footer>
+    <p>Contact me on <a href="https://www.linkedin.com/in/matteo-vicari-mv989">LinkedIn</a> | <a href="mailto:matt.videars@gmail.com">matt.videars@gmail.com</a></p>
+  </footer>
 </body>
 </html>

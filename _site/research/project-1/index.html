@@ -1,34 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viruses spread</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viruses spread</title>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/style.css">
 </head>
 <body>
-    <div class="page-layout">
-        <h1>Spread of viruses on computer networks (ITA - Degree thesis)</h1>
 
-        <h2>Abstract</h2>
-        <p>
-            I virus informatici rimangono una minaccia significativa per le reti e i sistemi odierni. I meccanismi di difesa esistenti si concentrano sulla scansione in locale delle firme dei virus. Questi meccanismi possono rilevare e prevenire la diffusione di noti malware, ma si dimostrano di scarso aiuto nella progettazione di difese ottimali a livello globale.<br><br>
-        
-            La recente proliferazione di malware in grado di diffondersi autonomamente, senza il diretto intervento di un utente, rende la questione ancor più delicata, ma fornisce un punto di contatto con lo studio di epidemie biologiche. Questi ultimi tipi di malware, comunemente noti col termine <strong>worms</strong>, hanno infatti caratteristiche molto simili ai virus biologici. Ciò permetterà di poter applicare modelli già noti di epidemie naturali su epidemie digitali.<br><br>
-        
-            Con l’eccezione di alcuni studi di modellizzazione specializzati, molto rimane ancora sconosciuto sulle caratteristiche di propagazione di script malevoli e i fattori che li influenzano. Le domande determinanti in questi casi sono: <em>il malware riuscirà ad invadere l’intera rete, rimarrà per sempre o si estinguerà?</em> In questo articolo indaghiamo alcune tecniche di modellizzazione epidemiologica per rispondere a queste domande.<br><br>
-        
-            Nello specifico, siamo interessati a capire come si diffonde un virus in un network. Saranno necessari dei modelli analitici di propagazione virale, in grado di catturare l’impatto della topologia della rete su cui il virus si diffonde. Come verifica dei modelli teorici, verranno implementati tre diversi tipi di network sui quali simulare un’epidemia e studiarne l’andamento.
-        </p>        
-
-        <h3>Paper preview</h3>
-        <iframe src="https://docs.google.com/viewer?url=https://videars.github.io/assets/pdfs/research1.pdf&embedded=true" width="600" height="800"></iframe>
-        
-        <h3>Download</h3>
-        <p>
-            Download the entire project: 
-            <a href="https://github.com/Videars/Epidemy-simulation/archive/refs/heads/main.zip" download>Download ZIP</a>
-        </p>
+  <header>
+    <div class="banner">
+      <h1>
+        <span class="terminal-symbol">&gt;_</span> Matteo Vicari
+      </h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/research/">Research</a></li>
+          <!-- <li><a href="/projects/">Projects</a></li> -->
+          <li><a href="/about/">About me</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
+
+
+  <main>
+    <style>
+    main {
+        .default-layout {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            color: #000;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        h1 span {
+            color: #aaa;
+            font-weight: normal;
+            display: block;
+        }
+
+        h2 {
+            margin-top: 30px;
+            color: #333;
+            font-size: 1.5em;
+        }
+
+        h3 {
+            margin-top: 20px;
+            color: #000;
+            font-size: 1.2em;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        iframe {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .download-link {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .download-link:hover {
+            background-color: #45a049;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .default-layout {
+            padding: 15px;
+        }
+
+        h1 {
+            font-size: 1.8em;
+        }
+
+        h2 {
+            font-size: 1.3em;
+        }
+
+        h3 {
+            font-size: 1.1em;
+        }
+
+        iframe {
+            height: 600px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 1.6em;
+        }
+
+        h2 {
+            font-size: 1.2em;
+        }
+
+        h3 {
+            font-size: 1em;
+        }
+
+        .default-layout {
+            padding: 10px;
+        }
+
+        iframe {
+            height: 500px;
+        }
+
+        .download-link {
+            padding: 8px 12px;
+        }
+    }
+</style>
+
+<div class="default-layout">
+    <h1>Spread of viruses on computer networks <span>(ITA - Degree thesis)</span></h1>
+
+    <h3>Abstract</h3>
+    <p>
+        I virus informatici rimangono una minaccia significativa per le reti e i sistemi odierni. I meccanismi di difesa esistenti si concentrano sulla scansione in locale delle firme dei virus. Questi meccanismi possono rilevare e prevenire la diffusione di noti malware, ma si dimostrano di scarso aiuto nella progettazione di difese ottimali a livello globale.<br><br>
+
+        La recente proliferazione di malware in grado di diffondersi autonomamente, senza il diretto intervento di un utente, rende la questione ancor più delicata, ma fornisce un punto di contatto con lo studio di epidemie biologiche. Questi ultimi tipi di malware, comunemente noti col termine worms, hanno infatti caratteristiche molto simili ai virus biologici. Ciò permetterà di poter applicare modelli già noti di epidemie naturali su epidemie digitali.<br><br>
+
+        Con l’eccezione di alcuni studi di modellizzazione specializzati, molto rimane ancora sconosciuto sulle caratteristiche di propagazione di script malevoli e i fattori che li influenzano. Le domande determinanti in questi casi sono: <em>il malware riuscirà ad invadere l’intera rete, rimarrà per sempre o si estinguerà?</em> In questo articolo indaghiamo alcune tecniche di modellizzazione epidemiologica per rispondere a queste domande.<br><br>
+
+        Nello specifico, siamo interessati a capire come si diffonde un virus in un network. Saranno necessari dei modelli analitici di propagazione virale, in grado di catturare l’impatto della topologia della rete su cui il virus si diffonde. Come verifica dei modelli teorici, verranno implementati tre diversi tipi di network sui quali simulare un’epidemia e studiarne l’andamento.
+    </p>
+
+    <h3>Paper preview</h3>
+    <iframe src="https://docs.google.com/viewer?url=https://videars.github.io/assets/pdfs/research1.pdf&embedded=true" width="100%" height="800"></iframe>
+
+    <h3>Download</h3>
+    <p>
+        Download the entire project: 
+        <a class="download-link" href="https://github.com/Videars/Epidemy-simulation/archive/refs/heads/main.zip" download>Download ZIP</a>
+    </p>
+</div>
+
+  </main>
+
+  
+  <footer>
+    <p>Contact me on <a href="https://www.linkedin.com/in/matteo-vicari-mv989">LinkedIn</a> | <a href="mailto:matt.videars@gmail.com">matt.videars@gmail.com</a></p>
+  </footer>
 </body>
 </html>

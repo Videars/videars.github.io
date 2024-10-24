@@ -2,7 +2,6 @@
 layout: default
 title: "CV"
 ---
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +10,6 @@ title: "CV"
     <title>Curriculum Vitae</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <style>
-
         h1 {
             text-align: center;
             margin-bottom: 20px;
@@ -84,6 +82,84 @@ title: "CV"
         .cv-container section:not(:hover) {
             transform: scale(0.98);
         }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+            }
+
+            section {
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .resumeSubheading {
+                font-size: 0.9rem;
+            }
+
+            .resumeItemListStart {
+                margin-left: 15px;
+            }
+
+            .resumeProjectHeading {
+                font-size: 1rem;
+            }
+
+            .resumeDescriptions, .resumeDates {
+                font-size: 0.9rem;
+            }
+
+            .technical-skills {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            .resumeSubheading {
+                font-size: 0.8rem;
+            }
+
+            .resumeItem {
+                font-size: 0.85rem;
+            }
+
+            .resumeProjectHeading {
+                font-size: 0.95rem;
+            }
+
+            .resumeDescriptions, .resumeDates {
+                font-size: 0.85rem;
+            }
+
+            .technical-skills {
+                font-size: 0.85rem;
+            }
+
+            .cv-container {
+                gap: 15px;
+            }
+
+            section {
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -91,7 +167,6 @@ title: "CV"
     <h1>Curriculum Vitae</h1>
 
     <div class="cv-container">
-        <!-- Education Section -->
         <section>
             <h2>Education</h2>
             <div class="resumeSubheading">
@@ -120,7 +195,6 @@ title: "CV"
             </div>
         </section>
 
-        <!-- Projects Section -->
         <section>
             <h2>Projects</h2>
             <div>
@@ -150,7 +224,6 @@ title: "CV"
             </div>
         </section>
 
-        <!-- Experience Section -->
         <section>
             <h2>Work Experience</h2>
             <div class="resumeSubheading">
@@ -176,7 +249,6 @@ title: "CV"
             </div>
         </section>
 
-        <!-- Technical Skills Section -->
         <section>
             <h2>Technical Skills</h2>
             <div class="technical-skills">
