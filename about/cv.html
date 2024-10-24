@@ -1,0 +1,168 @@
+---
+layout: default
+title: "CV"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Vitae</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+            color: #4CAF50;
+        }
+
+        .resumeSubheading {
+            margin: 10px 0;
+        }
+
+        .resumeItemListStart {
+            margin-left: 20px;
+            list-style-type: disc;
+        }
+
+        .resumeItem {
+            margin: 5px 0;
+        }
+
+        .resumeProjectHeading {
+            font-weight: bold;
+        }
+
+        .resumeProjectHeading em {
+            font-style: italic;
+            color: #555;
+        }
+
+        .technical-skills {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Curriculum Vitae</h1>
+
+    <!-- Education Section -->
+    <section>
+        <h2>Education</h2>
+        <div class="resumeSubheading">
+            <strong>Master Degree in Cybersecurity at Sapienza University of Rome</strong><br>
+            Sep 2022 -- Ongoing<br>
+            <em>2-years master degree that teaches how to manage cyber threats and ensure secure software development.</em><br>
+            <small>Rome, Italy</small>
+        </div>
+        <div class="resumeSubheading">
+            <strong>Bachelor of Science in Mathematics at Tor Vergata University of Rome</strong><br>
+            Sep 2018 -- July 2022<br>
+            <em>3-years degree of courses in maths, computer science and physics to construct models of complex phenomena.</em><br>
+            <small>Rome, Italy</small>
+        </div>
+        <div class="resumeSubheading">
+            <strong>Cybint Solutions Cybersecurity Bootcamp</strong><br>
+            Feb 2022 -- June 2022<br>
+            <em>500h of online theorical lessons and practical activities on Cybint's learning platform. Final exam and certificate.</em><br>
+            <small>Rome, Italy</small>
+        </div>
+        <div class="resumeSubheading">
+            <strong>Colchester English Study Centre</strong><br>
+            Sep 2016<br>
+            <em>Two weeks English Language Stage with everyday college lessons and stay in an English family.</em><br>
+            <small>Colchester, England</small>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section>
+        <h2>Projects</h2>
+        <div class="resumeProjectHeading">
+            <strong>Practical Network Defence</strong> | <em>OPNsense, OpenVPN, DNSmasq, Bash, C</em><br>
+            Feb 2023 - June 2023
+            <ul class="resumeItemListStart">
+                <li class="resumeItem">Set up virtual network: 20+ devices including routers, switches, log, web, DNS servers, end-user devices. All communicate per agency policies, including internet access.</li>
+                <li class="resumeItem">Securing the above devices from the most common attacks with firewall rules, authentication mechanism, WAF, NAT, VPN, IPsec tunnels and EDRs.</li>
+                <li class="resumeItem">Implemented a logging system with a SIEM (Graylog) and a log server.</li>
+            </ul>
+        </div>
+        <div class="resumeProjectHeading">
+            <strong>Creation and Attack of Vulnerable Servers</strong> | <em>OpenSSH, Apache2, PHP, Bash, C, ACL, Attacking Tools</em><br>
+            Feb 2023 - July 2023
+            <ul class="resumeItemListStart">
+                <li class="resumeItem">Set up Ubuntu server with remote and local vulnerabilities: web and service-based remote flaws, critical file permission misconfigurations and service exploits locally.</li>
+                <li class="resumeItem">Scanned and exploited a similar Ubuntu server using Nmap, Burpsuite, Hydra, and GDB with no traces of exploit left.</li>
+            </ul>
+        </div>
+        <div class="resumeProjectHeading">
+            <strong>Analysis of Malwares Diffusion on Various Types of Networks</strong> | <em>R, R Studio, MATLAB</em><br>
+            January 2022
+            <ul class="resumeItemListStart">
+                <li class="resumeItem">Development of 3 different types of networks and simulation of a malware epidemic on them.</li>
+                <li class="resumeItem">Statistical analysis of the malware's spreading speed and the stability of epidemic depending on the structure of the network.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section>
+        <h2>Experience</h2>
+        <div class="resumeSubheading">
+            <strong>Bank of Italy</strong><br>
+            Jan 2024 -- Ongoing<br>
+            <em>Vice Assistant at RES</em><br>
+            <small>Rome, Italy</small>
+            <ul class="resumeItemListStart">
+                <li class="resumeItem">Statistical and supervisory reporting operator for banks and investment funds.</li>
+                <li class="resumeItem">Data analysis with SQL workbench and proprietary software to perform data quality management tasks.</li>
+            </ul>
+        </div>
+        <div class="resumeSubheading">
+            <strong>FisioVicari Medical Center</strong><br>
+            Sep 2018 -- Dec 2023<br>
+            <em>Network Administrator Assistant</em><br>
+            <small>Rome, Italy</small>
+            <ul class="resumeItemListStart">
+                <li class="resumeItem">Conducted routine and emergency maintenance of the work equipment.</li>
+                <li class="resumeItem">Performed software installations and upgrades to Windows operating systems.</li>
+                <li class="resumeItem">Incident response activities in case of attacks or security events.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Technical Skills Section -->
+    <section>
+        <h2>Technical Skills</h2>
+        <div class="technical-skills">
+            <strong>Languages:</strong> Python, C/C++, C#, R, MATLAB, Bash.<br>
+            <strong>Software and IDE:</strong> Office, Adobe, PyCharm, Visual Studio, RStudio, CodeBlocks.<br>
+            <strong>Operating Systems:</strong> Windows, Ubuntu, Kali, Parrot.
+        </div>
+    </section>
+
+</body>
+</html>
