@@ -13,6 +13,8 @@ body {
   line-height: 1.6;
   display: flex;
   flex-direction: column;
+  text-align: justify;
+  
 }
 
 .banner {
@@ -78,4 +80,10 @@ footer a:hover {
 
 footer {
   margin-top: auto;
+}
+
+.terminal-symbol {
+  color: #4CAF50;
+  font-weight: bold;
+  margin-right: 10px;
 }
