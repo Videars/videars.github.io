@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viruses in Distributed Systems</title>
+  <title>Viruses spread</title>
   <link rel="stylesheet" href="http://localhost:4000/assets/css/style.css">
 </head>
 <body>
@@ -172,46 +172,35 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.min.js"></script>
 
 <div class="default-layout">
-    <h1>Viruses in Distributed Systems <span>(ENG - Master degree thesis)</span></h1>
+    <h1>Spread of viruses on computer networks <span>(ITA - Degree thesis)</span></h1>
 
     <h3>Abstract</h3>
     <p>
-        The growing reliance on distributed systems for various applications has highlighted the need to address security vulnerabilities, particularly those posed by viruses and malicious software. This thesis investigates the nature and impact of viruses in distributed systems, analyzing how these threats exploit system vulnerabilities and compromise data integrity.<br><br>
-        
-        The focus of this research is on identifying the mechanisms through which viruses propagate and the defensive measures that can be implemented to mitigate their impact. By examining various case studies, this thesis aims to provide a comprehensive overview of the challenges posed by viruses and the strategies that can be employed to enhance system security.<br><br>
-        
-        This study also evaluates the effectiveness of existing security protocols in preventing virus attacks, offering insights into potential improvements and innovations in the field of cybersecurity.
+        I virus informatici rimangono una minaccia significativa per le reti e i sistemi odierni. I meccanismi di difesa esistenti si concentrano sulla scansione in locale delle firme dei virus. Questi meccanismi possono rilevare e prevenire la diffusione di noti malware, ma si dimostrano di scarso aiuto nella progettazione di difese ottimali a livello globale.<br><br>
+
+        La recente proliferazione di malware in grado di diffondersi autonomamente, senza il diretto intervento di un utente, rende la questione ancor più delicata, ma fornisce un punto di contatto con lo studio di epidemie biologiche. Questi ultimi tipi di malware, comunemente noti col termine worms, hanno infatti caratteristiche molto simili ai virus biologici. Ciò permetterà di poter applicare modelli già noti di epidemie naturali su epidemie digitali.<br><br>
+
+        Con l’eccezione di alcuni studi di modellizzazione specializzati, molto rimane ancora sconosciuto sulle caratteristiche di propagazione di script malevoli e i fattori che li influenzano. Le domande determinanti in questi casi sono: <em>il malware riuscirà ad invadere l’intera rete, rimarrà per sempre o si estinguerà?</em> In questo articolo indaghiamo alcune tecniche di modellizzazione epidemiologica per rispondere a queste domande.<br><br>
+
+        Nello specifico, siamo interessati a capire come si diffonde un virus in un network. Saranno necessari dei modelli analitici di propagazione virale, in grado di catturare l’impatto della topologia della rete su cui il virus si diffonde. Come verifica dei modelli teorici, verranno implementati tre diversi tipi di network sui quali simulare un’epidemia e studiarne l’andamento.
     </p>
 
-    <h3>Details</h3>
-    <p>
-        The analysis begins with a review of common types of viruses and their methods of propagation. We delve into the behavior of these malicious entities within distributed environments, focusing on their ability to spread rapidly across interconnected systems.<br><br>
-        
-        Additionally, the thesis explores various countermeasures, including software solutions, behavioral detection, and network isolation techniques. We also assess the effectiveness of these strategies through quantitative and qualitative analysis, providing a holistic view of the current state of cybersecurity against viruses in distributed systems.<br><br>
-        
-        The findings highlight the importance of ongoing research and development in this area, emphasizing the need for adaptive security measures that can respond to evolving threats.
-    </p>
+    <h3>Paper preview</h3>
 
     <div class="pdf-container">
         <canvas id="pdf-canvas"></canvas>
         <div id="loading-spinner">Loading PDF...</div>
-        <div class="page-info">Page <span id="current-page">1</span> of <span id="total-pages">0</span></div>
-        <div class="scrollbar-container">
-            <div class="scrollbar">
-                <div id="scrollbar-thumb" class="scrollbar-thumb"></div>
-            </div>
-        </div>
     </div>
 
     <h3>Download</h3>
     <p>
         Download the entire project: 
-        <a class="download-link" href="https://github.com/Videars/Blockchain-Consistency/archive/refs/heads/main.zip" download>Download ZIP</a>
+        <a class="download-link" href="https://github.com/Videars/Epidemy-simulation/archive/refs/heads/main.zip" download>Download ZIP</a>
     </p>
 </div>
 
 <script>
-    const pdfUrl = 'https://videars.github.io/assets/pdfs/research3.pdf';
+    const pdfUrl = 'https://videars.github.io/assets/pdfs/research1.pdf';
     const loadingSpinner = document.getElementById('loading-spinner');
     const pdfCanvas = document.getElementById('pdf-canvas');
     const canvasContext = pdfCanvas.getContext('2d');
