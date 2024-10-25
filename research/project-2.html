@@ -41,10 +41,32 @@ title: "Sleepy protocol consistency"
             margin-bottom: 20px;
         }
 
-        iframe {
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        .pdf-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            height: 80vh;
+            position: relative;
+        }
+
+        #pdf-canvas {
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        #loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2em;
+            color: #333;
         }
 
         a {
@@ -87,7 +109,7 @@ title: "Sleepy protocol consistency"
             font-size: 1.1em;
         }
 
-        iframe {
+        #pdf-canvas {
             height: 600px;
         }
     }
@@ -109,7 +131,7 @@ title: "Sleepy protocol consistency"
             padding: 10px;
         }
 
-        iframe {
+        #pdf-canvas {
             height: 500px;
         }
 
@@ -148,7 +170,7 @@ title: "Sleepy protocol consistency"
         In addition to proving consistency, this thesis investigates the most effective adversarial attack against the Sleepy protocol. We model this attack and analyze its probability of success in delaying consensus.<br><br>
     </p>
 
-    <div id="pdf-container">
+    <div class="pdf-container">
         <canvas id="pdf-canvas"></canvas>
         <div id="loading-spinner">Loading PDF...</div>
     </div>
@@ -161,33 +183,74 @@ title: "Sleepy protocol consistency"
 </div>
 
 <script>
-    const pdfUrl = 'https://videars.github.io/assets/pdfs/research1.pdf';
+    const pdfUrl = 'https://videars.github.io/assets/pdfs/research2.pdf';
     const loadingSpinner = document.getElementById('loading-spinner');
     const pdfCanvas = document.getElementById('pdf-canvas');
     const canvasContext = pdfCanvas.getContext('2d');
-  
+
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.worker.min.js';
-  
+
     pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc => {
-      const pageNumber = 1;
-  
-      pdfDoc.getPage(pageNumber).then(page => {
-        const viewport = page.getViewport({ scale: 1.5 });
-        pdfCanvas.height = viewport.height;
-        pdfCanvas.width = viewport.width;
-  
-        const renderContext = {
-          canvasContext: canvasContext,
-          viewport: viewport
-        };
-  
-        page.render(renderContext).promise.then(() => {
-          loadingSpinner.style.display = 'none';
+        let pageNum = 1;
+        const numPages = pdfDoc.numPages;
+
+        function renderPage(num) {
+            pdfDoc.getPage(num).then(page => {
+                const viewport = page.getViewport({ scale: 1.5 });
+                pdfCanvas.height = viewport.height;
+                pdfCanvas.width = viewport.width;
+
+                const renderContext = {
+                    canvasContext: canvasContext,
+                    viewport: viewport
+                };
+
+                page.render(renderContext).promise.then(() => {
+                    loadingSpinner.style.display = 'none';
+                });
+            });
+        }
+
+        renderPage(pageNum);
+
+        function changePage(delta) {
+            const newPageNum = pageNum + delta;
+            if (newPageNum > 0 && newPageNum <= numPages) {
+                pageNum = newPageNum;
+                renderPage(pageNum);
+            }
+        }
+
+        window.addEventListener('wheel', (event) => {
+            if (event.deltaY > 0) {
+                changePage(1);
+            } else {
+                changePage(-1);
+            }
+            event.preventDefault();
         });
-      });
+
+        let touchStartY = null;
+        pdfCanvas.addEventListener('touchstart', (event) => {
+            touchStartY = event.touches[0].clientY;
+        });
+
+        pdfCanvas.addEventListener('touchmove', (event) => {
+            if (!touchStartY) return;
+            const touchY = event.touches[0].clientY;
+            const touchDiff = touchStartY - touchY;
+
+            if (touchDiff > 50) {
+                changePage(1);
+                touchStartY = null;
+            } else if (touchDiff < -50) {
+                changePage(-1);
+                touchStartY = null;
+            }
+            event.preventDefault();
+        });
     }).catch(error => {
-      loadingSpinner.textContent = 'Failed to load PDF';
-      console.error(error);
+        loadingSpinner.textContent = 'Failed to load PDF';
+        console.error(error);
     });
-  </script>
-  
+</script>
