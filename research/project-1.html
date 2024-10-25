@@ -76,12 +76,13 @@ title: "Viruses spread"
 
         .scrollbar-container {
             width: 10px;
-            height: 80vh;
+            height: 100%;
             position: absolute;
             right: 0;
-            top: 20px;
+            top: 0;
             background: rgba(0, 0, 0, 0.1);
             border-radius: 5px;
+            margin-top: 10px;
         }
 
         .scrollbar {
@@ -230,10 +231,13 @@ title: "Viruses spread"
         }
 
         function updateScrollbar() {
+            const visibleHeight = pdfCanvas.clientHeight;
+            const pageRatio = Math.min(visibleHeight / (pdfDoc.numPages * visibleHeight), 1);
             const scrollPercent = (pageNum - 1) / (numPages - 1);
-            scrollbarThumb.style.height = (80 / numPages) + 'vh';
-            scrollbarThumb.style.transform = `translateY(${scrollPercent * 80}vh)`;
+            scrollbarThumb.style.height = (pageRatio * 100) + '%';
+            scrollbarThumb.style.transform = `translateY(${scrollPercent * (100 - pageRatio * 100)}%)`;
         }
+
 
         pdfCanvas.addEventListener('wheel', (event) => {
             changePage(event.deltaY > 0 ? 1 : -1);
