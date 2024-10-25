@@ -186,6 +186,8 @@ title: "Viruses spread"
 
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.worker.min.js';
 
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.worker.min.js';
+
     pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc => {
         let pageNum = 1;
         const numPages = pdfDoc.numPages;
@@ -284,5 +286,5 @@ title: "Viruses spread"
         loadingSpinner.textContent = 'Failed to load PDF';
         console.error(error);
     });
-    
+
 </script>
