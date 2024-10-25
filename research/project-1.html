@@ -231,13 +231,10 @@ title: "Viruses spread"
         }
 
         function updateScrollbar() {
-            const visibleHeight = pdfCanvas.clientHeight;
-            const pageRatio = Math.min(visibleHeight / (pdfDoc.numPages * visibleHeight), 1);
             const scrollPercent = (pageNum - 1) / (numPages - 1);
-            scrollbarThumb.style.height = (pageRatio * 100) + '%';
-            scrollbarThumb.style.transform = `translateY(${scrollPercent * (100 - pageRatio * 100)}%)`;
+            scrollbarThumb.style.height = (80 / numPages) + 'vh';
+            scrollbarThumb.style.transform = `translateY(${scrollPercent * 80}vh)`;
         }
-
 
         pdfCanvas.addEventListener('wheel', (event) => {
             changePage(event.deltaY > 0 ? 1 : -1);
