@@ -93,26 +93,34 @@
             color: #333;
         }
 
-        a {
-            color: #4CAF50;
-            font-weight: bold;
+        .page-info {
+            margin-top: 10px;
+            font-size: 1em;
         }
 
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .download-link {
-            background-color: #4CAF50;
-            color: #fff;
-            padding: 10px 15px;
+        .scrollbar-container {
+            width: 10px;
+            height: 80vh;
+            position: absolute;
+            right: 0;
+            top: 20px;
+            background: rgba(0, 0, 0, 0.1);
             border-radius: 5px;
-            text-decoration: none;
-            transition: background 0.3s;
         }
 
-        .download-link:hover {
-            background-color: #45a049;
+        .scrollbar {
+            width: 100%;
+            background: #4CAF50;
+            border-radius: 5px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .scrollbar-thumb {
+            background: #45a049;
+            border-radius: 5px;
+            position: absolute;
+            width: 100%;
         }
     }
 
@@ -158,10 +166,6 @@
         #pdf-canvas {
             height: 500px;
         }
-
-        .download-link {
-            padding: 8px 12px;
-        }
     }
 </style>
 
@@ -197,6 +201,12 @@
     <div class="pdf-container">
         <canvas id="pdf-canvas"></canvas>
         <div id="loading-spinner">Loading PDF...</div>
+        <div class="page-info">Page <span id="current-page">1</span> of <span id="total-pages">0</span></div>
+        <div class="scrollbar-container">
+            <div class="scrollbar">
+                <div id="scrollbar-thumb" class="scrollbar-thumb"></div>
+            </div>
+        </div>
     </div>
 
     <h3>Download</h3>
@@ -211,12 +221,17 @@
     const loadingSpinner = document.getElementById('loading-spinner');
     const pdfCanvas = document.getElementById('pdf-canvas');
     const canvasContext = pdfCanvas.getContext('2d');
+    const currentPageElement = document.getElementById('current-page');
+    const totalPagesElement = document.getElementById('total-pages');
+    const scrollbarThumb = document.getElementById('scrollbar-thumb');
 
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.worker.min.js';
 
     pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc => {
         let pageNum = 1;
         const numPages = pdfDoc.numPages;
+
+        totalPagesElement.textContent = numPages;
 
         function renderPage(num) {
             pdfDoc.getPage(num).then(page => {
@@ -231,6 +246,8 @@
 
                 page.render(renderContext).promise.then(() => {
                     loadingSpinner.style.display = 'none';
+                    currentPageElement.textContent = pageNum;
+                    updateScrollbar();
                 });
             });
         }
@@ -245,12 +262,14 @@
             }
         }
 
-        window.addEventListener('wheel', (event) => {
-            if (event.deltaY > 0) {
-                changePage(1);
-            } else {
-                changePage(-1);
-            }
+        function updateScrollbar() {
+            const scrollPercent = (pageNum - 1) / (numPages - 1);
+            scrollbarThumb.style.height = (80 / numPages) + 'vh';
+            scrollbarThumb.style.transform = `translateY(${scrollPercent * 80}vh)`;
+        }
+
+        pdfCanvas.addEventListener('wheel', (event) => {
+            changePage(event.deltaY > 0 ? 1 : -1);
             event.preventDefault();
         });
 
@@ -273,6 +292,35 @@
             }
             event.preventDefault();
         });
+
+        scrollbarThumb.addEventListener('mousedown', (event) => {
+            const startY = event.clientY;
+
+            function onMouseMove(e) {
+                const deltaY = e.clientY - startY;
+                const scrollPercent = Math.min(Math.max(deltaY / (80 * window.innerHeight / 100), 0), 1);
+                pageNum = Math.ceil(scrollPercent * numPages);
+                renderPage(pageNum);
+            }
+
+            function onMouseUp() {
+                window.removeEventListener('mousemove', onMouseMove);
+                window.removeEventListener('mouseup', onMouseUp);
+            }
+
+            window.addEventListener('mousemove', onMouseMove);
+            window.addEventListener('mouseup', onMouseUp);
+            event.preventDefault();
+        });
+
+        scrollbarThumb.addEventListener('click', (event) => {
+            const rect = scrollbarThumb.getBoundingClientRect();
+            const clickY = event.clientY - rect.top;
+            const scrollPercent = clickY / rect.height;
+            pageNum = Math.ceil(scrollPercent * numPages);
+            renderPage(pageNum);
+        });
+
     }).catch(error => {
         loadingSpinner.textContent = 'Failed to load PDF';
         console.error(error);
