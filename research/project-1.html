@@ -69,11 +69,6 @@ title: "Viruses spread"
             color: #333;
         }
 
-        .page-info {
-            margin-top: 10px;
-            font-size: 1em;
-        }
-
         .scrollbar-container {
             width: 10px;
             height: 99%;
@@ -141,6 +136,11 @@ title: "Viruses spread"
             padding: 8px 12px;
             font-size: 0.9em;
         }
+
+        .pdf-container {
+            height: 60vh;
+        }
+
     }
 
     @media (max-width: 480px) {
@@ -167,6 +167,10 @@ title: "Viruses spread"
         .download-link {
             padding: 6px 10px;
             font-size: 0.8em;
+        }
+
+        .pdf-container {
+            height: 40vh;
         }
     }
 </style>
@@ -212,6 +216,7 @@ title: "Viruses spread"
     const pdfCanvas = document.getElementById('pdf-canvas');
     const canvasContext = pdfCanvas.getContext('2d');
     const scrollbarThumb = document.getElementById('scrollbar-thumb');
+    const pdfContainer = document.querySelector('.pdf-container');
 
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.worker.min.js';
 
@@ -256,17 +261,17 @@ title: "Viruses spread"
             scrollbarThumb.style.transform = `translateY(${scrollPercent * (containerHeight - thumbHeight)}px)`;
         }
 
-        pdfCanvas.addEventListener('wheel', (event) => {
+        pdfContainer.addEventListener('wheel', (event) => {
             changePage(event.deltaY > 0 ? 1 : -1);
             event.preventDefault();
         });
 
         let touchStartY = null;
-        pdfCanvas.addEventListener('touchstart', (event) => {
+        pdfContainer.addEventListener('touchstart', (event) => {
             touchStartY = event.touches[0].clientY;
         });
 
-        pdfCanvas.addEventListener('touchmove', (event) => {
+        pdfContainer.addEventListener('touchmove', (event) => {
             if (!touchStartY) return;
             const touchY = event.touches[0].clientY;
             const touchDiff = touchStartY - touchY;
@@ -283,7 +288,7 @@ title: "Viruses spread"
 
         scrollbarThumb.addEventListener('mousedown', (event) => {
             const startY = event.clientY;
-            const initialThumbPosition = scrollbarThumb.getBoundingClientRect().top - document.querySelector('.scrollbar-container').getBoundingClientRect().top;
+            const initialThumbPosition = scrollbarThumb.getBoundingClientRect().top - pdfContainer.getBoundingClientRect().top;
 
             function onMouseMove(e) {
                 const deltaY = e.clientY - startY;
