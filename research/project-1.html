@@ -41,60 +41,6 @@ title: "Viruses spread"
             margin-bottom: 20px;
         }
 
-        .pdf-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow: hidden;
-            height: 80vh;
-            position: relative;
-        }
-
-        #pdf-canvas {
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            margin-bottom: 10px;
-            overflow: hidden;
-            max-width: 100%;
-        }
-
-        #loading-spinner {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.2em;
-            color: #333;
-        }
-
-        .scrollbar-container {
-            width: 10px;
-            height: 99%;
-            position: absolute;
-            right: 0;
-            top: 0;
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-            margin-top: 0px;
-        }
-
-        .scrollbar {
-            width: 100%;
-            background: #4CAF50;
-            border-radius: 5px;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .scrollbar-thumb {
-            background: #45a049;
-            border-radius: 5px;
-            position: absolute;
-            width: 100%;
-        }
-
         .download-link {
             background-color: #4CAF50;
             color: #fff;
@@ -128,19 +74,6 @@ title: "Viruses spread"
             font-size: 1.1em;
         }
 
-        #pdf-canvas {
-            height: 600px;
-        }
-
-        .download-link {
-            padding: 8px 12px;
-            font-size: 0.9em;
-        }
-
-        .pdf-container {
-            height: 60vh;
-        }
-
     }
 
     @media (max-width: 480px) {
@@ -158,19 +91,6 @@ title: "Viruses spread"
 
         .default-layout {
             padding: 10px;
-        }
-
-        #pdf-canvas {
-            height: 500px;
-        }
-
-        .download-link {
-            padding: 6px 10px;
-            font-size: 0.8em;
-        }
-
-        .pdf-container {
-            height: 40vh;
         }
     }
 </style>
@@ -193,15 +113,8 @@ title: "Viruses spread"
 
     <h3>Paper preview</h3>
 
-    <div class="pdf-container">
-        <canvas id="pdf-canvas"></canvas>
-        <div id="loading-spinner">Loading PDF...</div>
-        <div class="scrollbar-container">
-            <div class="scrollbar">
-                <div id="scrollbar-thumb" class="scrollbar-thumb"></div>
-            </div>
-        </div>
-    </div>    
+    <iframe src="https://docs.google.com/viewer?url=https://drive.google.com/file/d/1HV6e1hhcE2Y3Rrf10ZG5uvryzwZItjLy/view?usp=sharing&embedded=true" width="600" height="800"></iframe>
+
 
     <h3>Download</h3>
     <p>
@@ -209,111 +122,3 @@ title: "Viruses spread"
         <a class="download-link" href="https://github.com/Videars/Epidemy-simulation/archive/refs/heads/main.zip" download>Download ZIP</a>
     </p>
 </div>
-
-<script>
-    const pdfUrl = 'https://videars.github.io/assets/pdfs/research1.pdf';
-    const loadingSpinner = document.getElementById('loading-spinner');
-    const pdfCanvas = document.getElementById('pdf-canvas');
-    const canvasContext = pdfCanvas.getContext('2d');
-    const scrollbarThumb = document.getElementById('scrollbar-thumb');
-    const pdfContainer = document.querySelector('.pdf-container');
-
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.worker.min.js';
-
-    pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc => {
-        let pageNum = 1;
-        const numPages = pdfDoc.numPages;
-
-        function renderPage(num) {
-            pdfDoc.getPage(num).then(page => {
-                const viewport = page.getViewport({ scale: 1.5 });
-                pdfCanvas.height = viewport.height;
-                pdfCanvas.width = viewport.width;
-
-                const renderContext = {
-                    canvasContext: canvasContext,
-                    viewport: viewport
-                };
-
-                page.render(renderContext).promise.then(() => {
-                    loadingSpinner.style.display = 'none';
-                    updateScrollbar();
-                });
-            });
-        }
-
-        renderPage(pageNum);
-
-        function changePage(delta) {
-            const newPageNum = pageNum + delta;
-            if (newPageNum > 0 && newPageNum <= numPages) {
-                pageNum = newPageNum;
-                renderPage(pageNum);
-            }
-        }
-
-        function updateScrollbar() {
-            const containerHeight = document.querySelector('.scrollbar-container').clientHeight;
-            const thumbHeight = Math.max(containerHeight / numPages, 20);
-            const scrollPercent = (pageNum - 1) / (numPages - 1);
-
-            scrollbarThumb.style.height = `${thumbHeight}px`;
-            scrollbarThumb.style.transform = `translateY(${scrollPercent * (containerHeight - thumbHeight)}px)`;
-        }
-
-        pdfContainer.addEventListener('wheel', (event) => {
-            changePage(event.deltaY > 0 ? 1 : -1);
-            event.preventDefault();
-        });
-
-        let touchStartY = null;
-        pdfContainer.addEventListener('touchstart', (event) => {
-            touchStartY = event.touches[0].clientY;
-        });
-
-        pdfContainer.addEventListener('touchmove', (event) => {
-            if (!touchStartY) return;
-            const touchY = event.touches[0].clientY;
-            const touchDiff = touchStartY - touchY;
-
-            if (touchDiff > 50) {
-                changePage(1);
-                touchStartY = null;
-            } else if (touchDiff < -50) {
-                changePage(-1);
-                touchStartY = null;
-            }
-            event.preventDefault();
-        });
-
-        scrollbarThumb.addEventListener('mousedown', (event) => {
-            const startY = event.clientY;
-            const initialThumbPosition = scrollbarThumb.getBoundingClientRect().top - pdfContainer.getBoundingClientRect().top;
-
-            function onMouseMove(e) {
-                const deltaY = e.clientY - startY;
-                const containerHeight = document.querySelector('.scrollbar-container').clientHeight;
-                const thumbHeight = scrollbarThumb.clientHeight;
-
-                const newThumbPosition = Math.min(Math.max(initialThumbPosition + deltaY, 0), containerHeight - thumbHeight);
-                const scrollPercent = newThumbPosition / (containerHeight - thumbHeight);
-
-                pageNum = Math.ceil(scrollPercent * numPages);
-                renderPage(pageNum);
-            }
-
-            function onMouseUp() {
-                window.removeEventListener('mousemove', onMouseMove);
-                window.removeEventListener('mouseup', onMouseUp);
-            }
-
-            window.addEventListener('mousemove', onMouseMove);
-            window.addEventListener('mouseup', onMouseUp);
-            event.preventDefault();
-        });
-
-    }).catch(error => {
-        loadingSpinner.textContent = 'Failed to load PDF';
-        console.error(error);
-    });
-</script>
