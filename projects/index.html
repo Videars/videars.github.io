@@ -1,0 +1,117 @@
+---
+layout: default
+title: "Projects"
+---
+<style>
+  main {
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .research-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .research-box {
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .research-box:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    a {
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+    }
+
+    a span {
+      color: #aaa;
+      font-weight: normal;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding: 10px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .research-box {
+      padding: 15px;
+    }
+
+    a {
+      font-size: 1rem;
+    }
+
+    a span {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .research-section {
+      gap: 15px;
+    }
+
+    .research-box {
+      padding: 12px;
+    }
+
+    a {
+      font-size: 0.9rem;
+    }
+
+    a span {
+      font-size: 0.85rem;
+    }
+  }
+</style>
+
+<main>
+  <h1>Cybersecurity projects</h1>
+  <div class="research-section">
+    <div class="research-box">
+      <a href="pnd/index.html">Practical Network Defence <span>(ENG - Course project)</span></a>
+    </div>
+    <div class="research-box">
+      <a href="ethical/index.html">Creation and Attack of vulnerable servers <span>(ENG - Course project)</span></a>
+    </div>
+    <div class="research-box">
+      <a href="remora/index.html">Remora - DAPP based on Ethereum blockchain <span>(ENG - Course project)</span></a>
+    </div>
+  </div>
+  <h1>Math projects</h1>
+  <div class="research-section">
+    <div class="research-box">
+      <a href="zeroes/index.html">Zeroes distribution of quadratic equations <span>(ITA - Course project)</span></a>
+    </div>
+    <div class="research-box">
+      <a href="project-2/index.html">Sorting algorithms comparison <span>(ITA - Course project)</span></a>
+    </div>
+  </div>
+</main>
